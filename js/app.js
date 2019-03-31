@@ -49,6 +49,7 @@ function flip(e) {
 // add the clicked card to openCards array and call match function if the opend cards more than one
 function AddToOpenCards(e) {
     openCards.push(e);
+    e.removeEventListener('click',listenerFunction);
     if(openCards.length>=2)
     {
       if(openCards[0].innerHTML==openCards[1].innerHTML)
@@ -65,7 +66,7 @@ function AddToOpenCards(e) {
 
 // check for matchability between tow opend cards
 function match(e) {
-    e.classList.remove("open","show");
+    e.classList.remove("open","show","unmatch");
     e.classList.add("match");
     cardsRemain--;
     //romve listener function for the two matched cards
@@ -78,6 +79,7 @@ function unmatch() {
     if(openCards[i].classList.toggle("unmatch")){
       openCards[i].classList.add("unmatch");
     }
+    openCards[i].addEventListener('click',listenerFunction);
   }
   setTimeout(unflip , 700);
 }
@@ -144,6 +146,7 @@ function setTime() {
 
 // popup window when the user is win and display the rating and time took to finish the game
 function gameEnd() {
+  time = 30 - time;
   if(confirm('Congratulations 🎉🎉! You did it with \ntotal moves:'+ moves +'\nStar rating: '+ rating +' \nDuration: ' + time + ' Sec.\n Do you want to play again?'))
   {
     window.location.reload();
