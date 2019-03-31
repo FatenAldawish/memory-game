@@ -21,7 +21,6 @@
  let cardsRemain = 16 ;
  let restart = document.getElementById("restart");
  let ratingStar = document.querySelectorAll('li.star');
- let unm = false;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -58,7 +57,7 @@ function AddToOpenCards(e) {
         openCards.length = 0;
       }
       else {
-        unmatch();        
+        unmatch();
         unflip();
         openCards.length = 0;
       }
