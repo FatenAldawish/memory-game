@@ -13,7 +13,7 @@
   */
  let cards = document.querySelectorAll('li.card');
  let openCards = new Array();
- let moves=0;
+ let moves = 0;
  let movesValue = document.getElementById("moves");
  let rating = 0;
  let time = 0;
@@ -58,8 +58,6 @@ function AddToOpenCards(e) {
       }
       else {
         unmatch();
-        unflip();
-        openCards.length = 0;
       }
     }
 }
@@ -73,13 +71,14 @@ function match(e) {
     e.removeEventListener('click',listenerFunction);
 }
 
-// add umatch CSS effect
+// add umatch CSS effect then call unflip function
 function unmatch() {
   for (var i = 0; i < openCards.length; i++) {
     if(openCards[i].classList.toggle("unmatch")){
       openCards[i].classList.add("unmatch");
     }
   }
+  setTimeout(unflip , 700);
 }
 
 // flip the card by hidding the symbol and make some CSS changes
@@ -87,15 +86,7 @@ function unflip() {
   for (var i = 0; i < openCards.length; i++) {
     openCards[i].classList.remove("open","show");
   }
-}
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
+  openCards.length = 0;
 }
 
 // function that calculate moves number as well as update the rating star by change the class of the icons
@@ -153,6 +144,11 @@ function gameOver() {
   if(confirm('Game Over :(!!\nDo you want to try again?'))
   {
     window.location.reload();
+  }else{
+    // if the user press cancel then disable all the unflip cards to froze the boerd
+    for (var i = 0; i < cards.length; i++ ) {
+        cards[i].removeEventListener('click', listenerFunction);
+    }
   }
 }
 
@@ -171,7 +167,6 @@ function listenerFunction() {
     flip(this);
     AddToOpenCards(this);
     movesCounter();
-    // sleep(1000);
 }
 
 // add listener event for every card a
