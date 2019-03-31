@@ -10,6 +10,7 @@
   *    cardsRemain: number of unfinished cards
   *    restart: holds restart icon
   *    ratingStar: holds list of star rating to be modified through the game
+  *    startTimer: varibale used to call the timer function every 1 sec
   */
  let cards = document.querySelectorAll('li.card');
  let openCards = new Array();
@@ -21,7 +22,7 @@
  let cardsRemain = 16 ;
  let restart = document.getElementById("restart");
  let ratingStar = document.querySelectorAll('li.star');
-
+ var startTimer;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -37,8 +38,8 @@ function shuffle(array) {
     return array;
 }
 
-// add event listener that reload the page whenever the restart icon clicked
-restart.addEventListener('click',reset);
+// // add event listener that reload the page whenever the restart icon clicked
+// restart.addEventListener('click',reset);
 
 // flip the card by showing the symbol and make some CSS changes
 function flip(e) {
@@ -81,12 +82,22 @@ function unmatch() {
   setTimeout(unflip , 700);
 }
 
-// flip the card by hidding the symbol and make some CSS changes
+// flip the unmatched card by hidding the symbol and make some CSS changes
 function unflip() {
   for (var i = 0; i < openCards.length; i++) {
     openCards[i].classList.remove("open","show");
   }
   openCards.length = 0;
+}
+
+// hide all cards symbol to start the game
+function unflipAll() {
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].classList.remove("open","show");
+  }
+
+  // start timer by update the count down every 1 second
+  startTimer = setInterval(setTime, 1000);
 }
 
 // function that calculate moves number as well as update the rating star by change the class of the icons
@@ -118,14 +129,14 @@ function setTime() {
 
   // If the count down is finished, stop the game and call game over function
   if (time === -1) {
-    clearInterval(x);
+    clearInterval(startTimer);
     document.getElementById("time").innerHTML =  "0 s ";
     gameOver();
   }
 
   // If the user win, call game end function
   if (cardsRemain === 0){
-    clearInterval(x);
+    clearInterval(startTimer);
     document.getElementById("time").innerHTML =  time + " s ";
     gameEnd();
   }
@@ -176,10 +187,27 @@ function createEventListener() {
   }
 }
 
+// game render when the page is loaded
+var start = gameRender();
 
-// shuffles the cards randomly, create an event listener for each card and then start the game
-cards = shuffle(cards);
-createEventListener();
+// render function to set up all the functionality
+function gameRender(){
 
-// Update the count down every 1 second
-var x = setInterval(setTime, 1000);
+  // add event listener that reload the page whenever the restart icon clicked
+  restart.addEventListener('click',reset);
+
+  // shuffles the cards randomly, create an event listener for each card and then start the game
+  cards = shuffle(cards);
+
+  // add event listener for each card
+  createEventListener();
+
+  // show the cards for 1300 milisecond then hide it and start the game
+  for (var i = 0; i < cards.length; i++ ) {
+      flip(cards[i]);
+  }
+
+  // hide cards content and start the game timer
+  setTimeout(unflipAll , 1300);
+
+};

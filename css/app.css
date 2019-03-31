@@ -79,10 +79,14 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+    transform: rotateY(180deg);
 }
 
 .deck .card.unmatch{
-  animation: shake 0.5s; 
+  animation: shake 0.5s;
 }
 
 @keyframes shake {
