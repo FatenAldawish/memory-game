@@ -11,9 +11,9 @@ The memory game is a basic matching game to test the player's memory. In a deck 
 
 ## Instructions
 
-1- Clone the repository or download it.
-2- Unzip the folder.
-3- Double click on index.html file.
-4- Challenge yourself 🎉.
+1. Clone the repository or download it.
+2. Unzip the folder.
+3. Double click on index.html file.
+4. Challenge yourself 🎉.
 
 
