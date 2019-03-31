@@ -2,19 +2,18 @@
 
 ## Table of Contents
 
+* [Memory Game Idea](#Memory-Game-Idea)
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+
+## Memory Game Idea
+
+The memory game is a basic matching game to test the player's memory. In a deck of paired cards, the player needs to match each pair to win the game.
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+1- Clone the repository or download it.
+2- Unzip the folder.
+3- Double click on index.html file.
+4- Challenge yourself 🎉.
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
